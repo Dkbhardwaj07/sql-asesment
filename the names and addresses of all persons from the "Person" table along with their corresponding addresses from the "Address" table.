@@ -1,0 +1,10 @@
+Write an SQL query to retrieve the names and addresses of all persons from the "Person" table along with their corresponding addresses from the "Address" table.
+SELECT
+    p.FirstName,
+    p.LastName,
+    a.City,
+    a.State
+FROM
+    Person p
+JOIN
+    Address a ON p.PersonId = a.PersonId;
