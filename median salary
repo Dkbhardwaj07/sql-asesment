@@ -1,0 +1,15 @@
+Write a SQL query to find the median salary of each company
+SELECT Company,
+       CASE
+           WHEN COUNT(*) % 2 = 0 THEN
+               (MAX(Salary1) + MIN(Salary2)) / 2
+           ELSE
+               Salary1
+       END AS MedianSalary
+  FROM (
+           SELECT Company,
+                  Salary AS Salary1,
+                  LEAD(Salary) OVER(PARTITION BY Company ORDER BY Salary) AS Salary2
+             FROM Employee
+       ) AS SalaryPairs
+GROUP BY Company;
